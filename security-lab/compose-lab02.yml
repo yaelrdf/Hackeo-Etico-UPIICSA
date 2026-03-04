@@ -1,0 +1,33 @@
+services:
+  kali-lab02:
+    image: kali-lab
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    hostname: kali-lab-02
+    restart: unless-stopped
+    container_name: kali-lab-02
+    tty: true
+    stdin_open: true
+    networks:
+      lab_net:
+        ipv4_address: 10.42.60.10
+    
+
+  metasploitable-lab02:
+    image: tleemcjr/metasploitable2:latest
+    restart: unless-stopped
+    container_name: metasploitable-lab-02
+    tty: true
+    stdin_open: true
+    networks:
+      lab_net:
+        ipv4_address: 10.42.60.20
+
+networks:
+  lab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.42.60.0/24
+          gateway: 10.42.60.1

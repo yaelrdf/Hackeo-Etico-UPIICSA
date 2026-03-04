@@ -1,0 +1,12 @@
+services:
+  kali:
+    image: kalilinux/kali-rolling
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    hostname: kali-lab
+    restart: unless-stopped
+    container_name: kali-lab
+    tty: true
+    stdin_open: true
+    
