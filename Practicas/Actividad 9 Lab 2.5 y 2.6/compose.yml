@@ -1,0 +1,8 @@
+services:
+  webserver:
+    image: php:8.2-apache
+    container_name: lab_webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./.www:/var/www/html

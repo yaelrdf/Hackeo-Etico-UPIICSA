@@ -1,0 +1,48 @@
+services:
+  kali:
+    image: kali-lab
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    hostname: kali-lab
+    restart: unless-stopped
+    container_name: kali-lab
+    tty: true
+    stdin_open: true
+    networks:
+      lab_net-web:
+        ipv4_address: 10.50.0.10
+    
+
+  web-dvwa:
+    image: vulnerables/web-dvwa
+    restart: unless-stopped
+    container_name: web-dvwa-lab
+    ports:
+      - "8181:80"
+    tty: true
+    stdin_open: true
+    networks:
+      lab_net-web:
+        ipv4_address: 10.50.0.20
+
+  zaproxy:
+      image: ghcr.io/zaproxy/zaproxy:stable
+      user: zap
+      container_name: zap-lab
+      restart: unless-stopped
+      command: zap-webswing.sh
+      ports:
+        - "8080:8080"   # Proxy
+        - "8090:8090"   # WebSwing UI
+      networks:
+        lab_net-web:
+          ipv4_address: 10.50.0.30
+
+networks:
+  lab_net-web:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.50.0.0/24
+          gateway: 10.50.0.1

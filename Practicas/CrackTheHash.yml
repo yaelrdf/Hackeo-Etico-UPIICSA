@@ -1,6 +1,6 @@
 services:
   kali:
-    image: kalilinux/kali-rolling
+    image: kali-lab
     cap_add:
       - NET_ADMIN
       - NET_RAW
@@ -12,17 +12,6 @@ services:
     networks:
       lab_net:
         ipv4_address: 10.50.0.10
-    
-
-  metasploitable:
-    image: tleemcjr/metasploitable2:latest
-    restart: unless-stopped
-    container_name: metasploitable-lab
-    tty: true
-    stdin_open: true
-    networks:
-      lab_net:
-        ipv4_address: 10.50.0.20
 
 networks:
   lab_net:
