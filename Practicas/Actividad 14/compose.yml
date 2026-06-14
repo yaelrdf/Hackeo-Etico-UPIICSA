@@ -1,0 +1,77 @@
+services:
+  dvwa:
+    image: citizenstig/dvwa:latest
+    container_name: dvwa
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.10
+
+  bwapp:
+    image: raesene/bwapp:latest
+    container_name: bwapp
+    ports:
+      - "8084:80"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.11
+
+  owaspbricks:
+    image: kirscht/owaspbricks:latest
+    container_name: owaspbricks
+    ports:
+      - "8085:80"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.12
+
+  webgoat:
+    image: webgoat/webgoat:latest
+    container_name: webgoat
+    ports:
+      - "8086:8080"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.13
+
+  wackopicko:
+    image: adamdoupe/wackopicko:latest
+    container_name: wackopicko
+    ports:
+      - "8087:80"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.14
+
+  peruggia:
+    image: buztheflash/peruggia:latest
+    container_name: peruggia
+    ports:
+      - "8088:80"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.15
+
+  bodgeit:
+    image: securecodebox/bodgeit:latest
+    container_name: bodgeit
+    ports:
+      - "8089:8080"
+    restart: unless-stopped
+    networks:
+      pentest-net:
+        ipv4_address: 192.168.56.16
+
+networks:
+  pentest-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.56.0/24

@@ -1,0 +1,27 @@
+services:
+  owasp-bwa:
+    image: raesene/bwapp:latest
+    container_name: owasp-bwa
+    restart: unless-stopped
+    ports:
+      - "8080:80"      # HTTP
+      - "8443:443"     # HTTPS
+    networks:
+      - pentest-net
+
+  cliente-firefox:
+    image: jlesage/firefox:latest
+    container_name: firefox-client
+    restart: unless-stopped
+    ports:
+      - "5800:5800"    # VNC
+    environment:
+      - VNC_PASSWORD=pentest
+    networks:
+      - pentest-net
+    volumes:
+      - ./data/firefox:/config
+
+networks:
+  pentest-net:
+    driver: bridge
