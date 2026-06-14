@@ -19,8 +19,8 @@ oauth = OAuth(app)
 # 4. Add http://localhost:5000/authorize to Authorized redirect URIs
 google = oauth.register(
     name='google',
-    client_id='678160319277-07jau1fhdfo93sbtncgvo77u7mpmfrei.apps.googleusercontent.com',  # Replace this
-    client_secret='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',  # Replace this
+    client_id='',  # Replace this
+    client_secret='',  # Replace this
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
